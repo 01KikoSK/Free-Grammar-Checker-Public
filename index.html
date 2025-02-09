@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Free Grammar Checker</title>
+<style>
+body { font-family: sans-serif; }
+textarea { width: 100%; height: 200px; border: 1px solid #ccc; padding: 10px; }
+button { padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; margin-right: 5px;}
+select { padding: 5px; margin-bottom: 10px;}
+#results { margin-top: 20px; border: 1px solid #ccc; padding: 10px; }
+</style>
+</head>
+<body>
+
+<h1>Free Grammar Checker</h1>
+
+<textarea id="text" placeholder="Enter text here..."></textarea><br>
+
+<label for="language">Language:</label>
+<select id="language">
+  <option value="auto">Auto Detect</option>
+  <option value="en">English</option>
+  <option value="pl">Polish</option>
+  <option value="es">Spanish</option>
+  <option value="sk">Slovak</option>
+  <option value="ja">Japanese</option>
+  <option value="de">German</option>
+  <option value="uk">Ukrainian</option>
+  <option value="eo">Esperanto</option>
+</select><br>
+
+<button onclick="checkGrammar('basic')">Check Grammar</button>
+<button onclick="checkGrammar('deep')">Deep Grammar Check</button>
+
+<div id="results">
+  Results will be displayed here...
+</div>
+
+<script>
+function checkGrammar(checkType) {
+  const text = document.getElementById("text").value;
+  const language = document.getElementById("language").value;
+  const resultsDiv = document.getElementById("results");
+
+  const wordCount = text.split(/\s+/).length;
+  if (wordCount > 5000) {
+    resultsDiv.innerHTML = "Text exceeds the 5000 word limit.";
+    return;
+  }
+
+  let resultsText = "";
+
+  // Placeholder for grammar checking logic.  Integrate with API here.
+
+  switch (checkType) {
+    case 'basic':
+      resultsText = `${language} Basic Check: ${text.length} characters (Placeholder - Integrate API)`;
+      break;
+    case 'deep':
+      resultsText = `${language} Deep Check: ${text.length} characters (Placeholder - Integrate API)`;
+      break;
+  }
+
+  resultsDiv.innerHTML = resultsText;
+
+  // Example of sending data to server (commented out):
+  /*
+  fetch('/grammarcheck', { // Replace with your server endpoint
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text: text, language: language, checkType: checkType })
+  })
+  .then(response => response.json())
+  .then(data => {
+    resultsDiv.innerHTML = data.results; // Display server's response
+  })
+  .catch(error => {
+    resultsDiv.innerHTML = "Error: " + error;
+  });
+  */
+}
+</script>
+
+</body>
+</html>
